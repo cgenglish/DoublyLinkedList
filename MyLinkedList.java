@@ -1,11 +1,21 @@
 public class MyLinkedList<T> {
-    private Node<T> head = null;
+    private Node<T> head = null, tail = null;
     private int size = 0;
+
+    //Getter for header or start of linked list
+    public Node<T> GetHead() {
+        return head;
+    }
+
+    //Getter for tail of end of linked list
+    public Node<T> GetTail() {
+        return tail;
+    }
 
     public void AddFront(T data) {
         Node<T> newNode = new Node<T>(data);
         if (head == null) {
-            head = newNode;
+            head = tail = newNode;
         } else {
             newNode.next = head;
             head = newNode;
@@ -27,18 +37,29 @@ public class MyLinkedList<T> {
         }
         Node<T> currentNode = head;
 
-        while (currentNode.next != null) {
-            currentNode = currentNode.next;
-        }
+        // while (currentNode.next != null) {
+        //     currentNode = currentNode.next;
+        // }
 
         // once we have our current last node
         Node<T> newNode = new Node<T>(data); // create the new node and ensure it's next is null
-        currentNode.next = newNode; // set the next of the old last node equal to the new node
+        tail.next = newNode; // set the next of the old last node equal to the new node
+        tail = newNode;
         size++;
     }
     
     // go to the element prior to where we want to insert our element
     public void Insert(int index, T data) {
+
+        //they are asking to add at the last element
+        if (index == size) {
+            Append(data);
+        }
+
+        if(index < 0 || index > size - 1)  {
+            return;
+        }
+
         Node<T> currentNode = head;
 
         for (int i = 0; i < index - 1; i++){
@@ -63,6 +84,9 @@ public class MyLinkedList<T> {
     }
 
     public void DeleteFront() {
+        if (head == tail) {
+            tail = null;
+        }
         head = head.next;
         size--;
     }
@@ -75,6 +99,7 @@ public class MyLinkedList<T> {
         //currentNode = null;
         System.out.println(currentNode.data);
         currentNode.next = null;
+        tail = currentNode;
         size--;
     }
 
@@ -105,6 +130,9 @@ public class MyLinkedList<T> {
         }
         System.out.println(currentNode.data); //shows which pointer we are looking at
         currentNode.next = currentNode.next.next;
+        if (currentNode.next == null) {
+            tail = currentNode;
+        }
         size--;
 
     }
