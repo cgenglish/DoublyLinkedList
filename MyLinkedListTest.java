@@ -42,12 +42,14 @@ public class MyLinkedListTest {
         //Arrange
         MyLinkedList<String> myLinkedList = new MyLinkedList<String>();
         myLinkedList.AddFront("Hello");
+        myLinkedList.AddFront("Hi");
+        myLinkedList.AddFront("Gato");
 
         //Act
         myLinkedList.DeleteNodeBasedOnValue("Art");
 
         //Assert
-        assertEquals(1, myLinkedList.GetSize());
+        assertEquals(3, myLinkedList.GetSize());
         //assertEquals(1, myLinkedList.GetSize());
 
     }

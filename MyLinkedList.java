@@ -87,16 +87,21 @@ public class MyLinkedList<T> {
         if(head == null) {
             return;
         }
-
         Node<T> currentNode = head;
+        
         if(currentNode.data == data) {
             DeleteFront();
             return;
         }
 
+        if (currentNode.next == null) {
+            return;
+        }
+
         while (currentNode.next.data != data) {
             currentNode = currentNode.next;
-            
+            if(currentNode.next == null)
+                return;
         }
         System.out.println(currentNode.data); //shows which pointer we are looking at
         currentNode.next = currentNode.next.next;
